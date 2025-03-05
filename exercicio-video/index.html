@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .video {
+        width: 600px;
+    }
+
+    .btn1,.btn2 {
+        margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+  <video class="video" controls src="https://cdn.pixabay.com/video/2025/02/23/260397_tiny.mp4"></video>
+  <button class="btn1" type="button" data-source="https://cdn.pixabay.com/video/2025/02/23/260397_tiny.mp4">Vídeo 1</button>
+  <button class="btn2" type="button" data-source="https://cdn.pixabay.com/video/2024/05/29/214409_tiny.mp4">Vídeo 2</button>
+ 
+  <script>
+    const video = document.querySelector('.video');
+ 
+    document.addEventListener('click', function(event) {
+      const el = event.target;
+ 
+      if (el.classList.contains('btn1') || el.classList.contains('btn2')) {
+        const videoSource = el.getAttribute('data-source');
+        video.setAttribute('src', videoSource);
+        console.log(videoSource);
+      }
+    })
+  </script>
+</body>
+</html>
