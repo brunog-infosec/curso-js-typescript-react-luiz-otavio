@@ -1,7 +1,7 @@
 // IIFE -> Immediately Invoked Function Expression
 //Geralmente utilizamos para fugir do escopo Global , e assim não deixar nossas variáveis escapar para o Escopo Global
 
-function qualquerCoisa(){
+function qualquerCoisa() {
     console.log("...")
 }
 qualquerCoisa(); // -> deveriamos fazer a chamada da mesma
@@ -17,7 +17,7 @@ const altura = 1.70;
 
 //Com isso também podemos receber argumentos de fora, e passar pra nossa auto invoke function
 
-(function(nome,sobrenome,idade,peso,altura){
+(function (nome, sobrenome, idade, peso, altura) {
     function criaNome(nome) {
         return nome + ' ' + sobrenome;
     }
@@ -32,9 +32,15 @@ const altura = 1.70;
 
     falaNome();
     falaCaracteristicas();
-})(nome,sobrenome,idade,peso,altura);
+})(nome, sobrenome, idade, peso, altura);
 
 // Exemplificando com uso Real em projetos das Invoked Functions
+/**
+ * Exemplo Real de Uso: Protegendo Variáveis do Escopo Global
+ * Imagine que temos um site onde manipulamos um carrinho de 
+ * compras, mas não queremos expor suas funções e variáveis ao escopo global. 
+ * Podemos usar uma IIFE para encapsular esse código.
+*/
 
 const Carrinho = (function () {
     // Variáveis privadas (não acessíveis fora da IIFE)
