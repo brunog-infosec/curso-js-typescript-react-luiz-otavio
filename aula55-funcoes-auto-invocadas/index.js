@@ -72,11 +72,13 @@ const Carrinho = (function () {
 })();
 
 // Tentando acessar `itens` diretamente (não funciona porque está encapsulado)
-console.log(typeof itens); // undefined
 
 // Usando o "módulo" do carrinho
 Carrinho.adicionarItem("Fone de Ouvido");
 Carrinho.adicionarItem("Mouse Gamer");
 Carrinho.listarItens();
 Carrinho.removerItem("Fone de Ouvido");
+Carrinho.adicionarItem("Teclado Mecânico")
 Carrinho.listarItens();
+
+console.log(typeof itens); // undefined -> sem acesso pelo browser
