@@ -13,7 +13,7 @@ function Pessoa(nome, sobrenome) {
     console.log(`Id do usuário : ${ID}`);
   };
 
-  //Metodo
+  //Metodo público
   this.metodo = function () {
     console.log("Sou um metodo do " + this.nome);
     metodoInterno();
