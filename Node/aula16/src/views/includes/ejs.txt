@@ -1,0 +1,10 @@
+<%= Imprime Escapando caracteres %>
+<% controle de fluxo (if, for, while, else.. ) %> 
+<%- Imprime sem escapar caracteres (html) %>
+<%# comentários %>
+<%- include('caminho/arquivo') %>
+
+
+<% numeros.forEach(numero => { %>
+ <%= numero %> <br />
+    <% }); %>
