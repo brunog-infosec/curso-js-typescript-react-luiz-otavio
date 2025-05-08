@@ -15,7 +15,7 @@ export default {
   // Configuração da pasta onde os uploads serão salvos
   storage: multer.diskStorage({
     destination: (req, file, cb) => {
-      cb(null, resolve(__dirname, '..', '..', 'uploads'));
+      cb(null, resolve(__dirname, '..', '..', 'uploads', 'images'));
     },
     filename: (req, file, cb) => {
       cb(null, `${Date.now()}_${random()}${extname(file.originalname)}`); // Arquivo upado terá nome com base data unix
