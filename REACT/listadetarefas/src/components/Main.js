@@ -12,23 +12,34 @@ export default class Main extends Component {
   state = {
     novaTarefa: '',
     tarefas: [],
+    index: -1,
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const { tarefas } = this.state;
+    const { tarefas, index } = this.state;
     let { novaTarefa } = this.state;
     novaTarefa = novaTarefa.trim();
 
     if (tarefas.indexOf(novaTarefa) !== -1 || novaTarefa === '') return;
 
-    // const novaTarefas = [...tarefas] //copia o array de novas tarefas
-    tarefas.push(novaTarefa);
+    const novasTarefas = [...tarefas] //copia o array de novas tarefas
 
-    this.setState({
-      tarefas,
-      novaTarefa: '',
-    })
+    if (index === -1) {
+      this.setState({
+        tarefas: [...novasTarefas, novaTarefa],
+        novaTarefa: '',
+      })
+    } else {
+      novasTarefas[index] = novaTarefa;
+
+      this.setState({
+        tarefas: [...novasTarefas],
+        index: -1,
+        novaTarefa: '',
+      })
+    }
+
   }
 
   handleDelete = (e, index) => {
@@ -39,6 +50,16 @@ export default class Main extends Component {
 
     this.setState({
       tarefas: [...novasTarefas]
+    })
+  }
+
+  handleEdit = (e, index) => {
+    const { tarefas } = this.state;
+
+
+    this.setState({
+      index,
+      novaTarefa: tarefas[index]
     })
   }
 
