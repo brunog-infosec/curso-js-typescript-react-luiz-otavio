@@ -1,7 +1,7 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Title = styled.h1`
-  color: ${props => (props.isRed ? 'red' : 'blue')}; //configurações do title
+  color: ${(props) => (props.isRed ? 'red' : 'blue')}; //configurações do title
   small {
     font-size: 12pt;
     margin-left: 15px;
