@@ -2,5 +2,5 @@ import axios from 'axios';
 
 //configuração da url padrão para requisições axios
 export default axios.create({
-  baseURL: 'COLOQUE_SUA_URL_AQUI',
+  baseURL: 'http://34.39.144.113:80',
 });
