@@ -6,9 +6,9 @@ import { persistReducer } from 'redux-persist';
 export default function persistedReducers(reducers) {
   const persistedReducers = persistReducer(
     {
-      key: 'NOME_DA_APLICACAO',
+      key: 'REACT-API',
       storage,
-      whitelist: ['example'], // Qual modulo vai salvar
+      whitelist: ['auth'], // Qual modulo vai salvar
     },
     reducers,
   );
