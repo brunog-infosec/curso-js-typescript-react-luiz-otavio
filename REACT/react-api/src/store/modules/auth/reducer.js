@@ -15,11 +15,18 @@ export default function exampleReducer(state = initialState, action) {
       newState.isLoggedIn = true;
       newState.token = action.payload.token;
       newState.user = action.payload.user;
+      newState.isLoading = false;
       return newState;
     }
 
     case types.LOGIN_FAILURE: {
       const newState = { ...initialState };
+      return newState; // caso houver falha no login, desloga o usuário enviando o estado inicial
+    }
+
+    case types.LOGIN_REQUEST: {
+      const newState = { ...state };
+      newState.isLoading = true;
       return newState; // caso houver falha no login, desloga o usuário enviando o estado inicial
     }
 
