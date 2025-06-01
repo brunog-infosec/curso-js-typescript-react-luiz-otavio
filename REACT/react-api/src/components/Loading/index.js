@@ -7,14 +7,10 @@ export default function Loading({ isLoading = false }) {
   return (
     <Container>
       <div></div>
-      <span>Carregando...</span>
+      <span className="loader"></span>
     </Container>
   );
 }
-
-// Loading.defaultProps = {
-//   isLoading: false,
-// };
 
 Loading.propTypes = {
   isLoading: PropTypes.bool,
