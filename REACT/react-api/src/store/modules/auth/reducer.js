@@ -30,6 +30,34 @@ export default function exampleReducer(state = initialState, action) {
       return newState; // caso houver falha no login, desloga o usuário enviando o estado inicial
     }
 
+    case types.REGISTER_REQUEST: {
+      const newState = { ...state };
+      newState.isLoading = true;
+      return newState; // caso houver falha no login, desloga o usuário enviando o estado inicial
+    }
+
+    // Estado para atualizar usuário
+    case types.REGISTER_UPDATED_SUCCESS: {
+      const newState = { ...state };
+      newState.user.nome = action.payload.nome;
+      newState.user.email = action.payload.email;
+      newState.isLoading = false;
+      return newState; // caso houver falha no login, desloga o usuário enviando o estado inicial
+    }
+
+    // Estado para criação do usuário
+    case types.REGISTER_CREATED_SUCCESS: {
+      const newState = { ...state };
+      newState.isLoading = false;
+      return newState; // caso houver falha no login, desloga o usuário enviando o estado inicial
+    }
+
+    case types.REGISTER_FAILURE: {
+      const newState = { ...state };
+      newState.isLoading = false;
+      return newState; // caso houver falha no login, desloga o usuário enviando o estado inicial
+    }
+
     default: {
       return state;
     }

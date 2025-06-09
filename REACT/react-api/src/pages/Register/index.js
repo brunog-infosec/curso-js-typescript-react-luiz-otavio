@@ -1,19 +1,32 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import { isEmail } from 'validator';
-import { get } from 'lodash';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { Container } from '../../styles/GlobalStyles';
 import { Form } from './styled';
-import axios from '../../services/axios';
-import history from '../../services/history';
 import Loading from '../../components/Loading';
+import * as actions from '../../store/modules/auth/actions';
 
 export default function Register() {
+  const dispatch = useDispatch();
+
+  //Vamos pegar os valores salvos do nosso state global
+  const id = useSelector((state) => state.auth.user.id);
+  const nomeStored = useSelector((state) => state.auth.user.nome);
+  const emailStored = useSelector((state) => state.auth.user.email);
+  const isLoading = useSelector((state) => state.auth.isLoading);
+
+  React.useEffect(() => {
+    if (!id) return;
+
+    setNome(nomeStored);
+    setEmail(emailStored);
+  }, []);
+
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -29,41 +42,21 @@ export default function Register() {
       toast.error('Email inválido');
     }
 
-    if (password.length < 6 || password.length > 50) {
+    // Verifica se usuário está logado
+    if (!id && (password.length < 6 || password.length > 50)) {
       formErrors = true;
       toast.error('Senha deve ter entre 6 e 50 caracteres');
     }
 
     if (formErrors) return;
 
-    setIsLoading(true);
-
-    try {
-      await axios.post('/users/', {
-        nome,
-        password,
-        email,
-      });
-
-      toast.success('Cadastro efetuado com sucesso!');
-
-      setIsLoading(false);
-      history.push('/login');
-      // console.log(response.data.errors);
-    } catch (e) {
-      const status = get(e, 'response.status', 0);
-      const errors = get(e, 'response.data.errors', []);
-      console.log(status, errors);
-
-      errors.map((error) => toast.error(error));
-      setIsLoading(false);
-    }
+    dispatch(actions.registerRequest({ nome, email, password, id }));
   }
 
   return (
     <Container>
       <Loading isLoading={isLoading} />
-      <h1>Crie sua conta</h1>
+      <h1>{id ? 'Editar Dados' : 'Crie sua conta'}</h1>
       <Form onSubmit={handleSubmit}>
         <label htmlFor="nome">
           Nome:
@@ -81,6 +74,7 @@ export default function Register() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Seu Email"
+            autoComplete="email"
           />
         </label>
         <label htmlFor="password">
@@ -90,9 +84,10 @@ export default function Register() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Sua Senha"
+            autoComplete="current-password"
           />
         </label>
-        <button type="submit">Cadastrar</button>
+        <button type="submit">{id ? 'Salvar Alteração' : 'Criar conta'}</button>
       </Form>
     </Container>
   );
