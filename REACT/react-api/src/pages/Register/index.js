@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { isEmail } from 'validator';
 import { useSelector, useDispatch } from 'react-redux';
@@ -17,12 +17,12 @@ export default function Register() {
   const emailStored = useSelector((state) => state.auth.user.email);
   const isLoading = useSelector((state) => state.auth.isLoading);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!id) return;
 
     setNome(nomeStored);
     setEmail(emailStored);
-  }, []);
+  }, [emailStored, id, nomeStored]);
 
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
