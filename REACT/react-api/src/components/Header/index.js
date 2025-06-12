@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import * as actions from '../../store/modules/auth/actions';
-import history from 'history';
+import history from '../../services/history';
 import { Nav } from './styled';
 
 export default function Header() {
